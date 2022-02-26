@@ -24,9 +24,10 @@
             android:paddingVertical="16dp"/>
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_juegodificil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Intermedio"
+            android:text="Dificil"
             android:backgroundTint="@color/warning"
             android:textColor="@color/black"
             app:cornerRadius="26dp"
@@ -36,23 +37,13 @@
         <com.google.android.material.button.MaterialButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Difícil"
+            android:text="Epico"
             app:cornerRadius="26dp"
             android:backgroundTint="@color/danger"
             android:layout_marginVertical="8dp"
             android:paddingVertical="16dp"/>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_demo_juego"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Ejemplo del juego"
-            app:cornerRadius="26dp"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            app:icon="@drawable/ic_question_mark"
-            android:layout_marginTop="40dp"
-            android:layout_marginBottom="8dp"
-            android:paddingVertical="16dp"/>
+
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_contadortiempo"

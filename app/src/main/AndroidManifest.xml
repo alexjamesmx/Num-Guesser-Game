@@ -4,21 +4,20 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:icon="@drawable/ic_baseline_gamepad_24"
+        android:label="GuessT201"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BasePrácticas56Y7">
         <activity
-            android:name=".DemoJuegoActivity"
+            android:name=".JuegodificilActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.BasePrácticas56Y7.FullScreen" />
         <activity
             android:name=".JuegoFacilActivity"
             android:exported="false"
-            android:label="Adivina (Fácil)"
-            android:screenOrientation="landscape"
-            android:theme="@style/Theme.BasePrácticas56Y7.FullScreen" />
+            android:label="Adivina (Fácil)" />
         <activity
             android:name=".ContadorTiempoActivity"
             android:exported="false"

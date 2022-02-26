@@ -9,10 +9,9 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button btnJuegofacil;
+    private Button btnJuegofacil, btnJuegodificil;
     private Button btnInstrucciones;
     private Button btnContadortiempo;
-    private Button btnDemoJuego;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         btnInstrucciones = findViewById(R.id.btn_instrucciones);
         btnContadortiempo = findViewById(R.id.btn_contadortiempo);
         btnJuegofacil = findViewById(R.id.btn_juegofacil);
-        btnDemoJuego = findViewById(R.id.btn_demo_juego);
+        btnJuegodificil = findViewById(R.id.btn_juegodificil);
 
         btnInstrucciones.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,17 +58,18 @@ public class MainActivity extends AppCompatActivity {
                 );
             }
         });
-
-        btnDemoJuego.setOnClickListener(new View.OnClickListener() {
+        btnJuegodificil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(
                         new Intent(
                                 MainActivity.this,
-                                DemoJuegoActivity.class
+                                JuegodificilActivity.class
                         )
                 );
             }
         });
+
+
     }
 }
