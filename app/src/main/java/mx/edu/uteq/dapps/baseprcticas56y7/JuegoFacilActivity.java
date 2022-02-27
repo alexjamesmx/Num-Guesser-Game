@@ -1,5 +1,5 @@
 package mx.edu.uteq.dapps.baseprcticas56y7;
-
+//DEPOENDENCIAS Y/O LIBRERIAS
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
@@ -20,13 +20,15 @@ import com.google.android.material.textfield.TextInputLayout;
 import java.util.Objects;
 
 public class JuegoFacilActivity extends AppCompatActivity {
-    private ActionBar actionBar;
 
+    private ActionBar actionBar;
+//VARIABLES PRIMITIVAS
     private final int NUM_MIN = 1;
     private final int NUM_MAX = 10;
     private int NUMERO_ADIVINAR = (int) Math.floor(Math.random() * (NUM_MAX - NUM_MIN + 1) + NUM_MIN);
     private int vidas;
-
+    boolean isAllFieldsChecked = false;
+//VARIABLES DE COMPONENTES
     private TextView tvVidas, tvVidasExtra;
     private ImageView ivMensaje;
     private TextView tvMensaje;
@@ -34,19 +36,16 @@ public class JuegoFacilActivity extends AppCompatActivity {
     private Button btnAdivinar, btnReset;
     private TextInputLayout tietBox;
 
-    boolean isAllFieldsChecked = false;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_juego_facil);
-
+//ACTION BAR PARA REGRESAR A HOME
         actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-
+//VALOR ASIGNADOS DE COMPONENTES A VARIABLES
         tvVidas = findViewById(R.id.tvVidas);
         tvVidasExtra = findViewById(R.id.tvVidasExtra);
         ivMensaje = findViewById(R.id.ivMensaje);
@@ -57,6 +56,10 @@ public class JuegoFacilActivity extends AppCompatActivity {
         tietBox = findViewById(R.id.tietBox);
         vidas = 3;
 
+/*      MENSAJE DANDO LA RESOUESTA CORRECTA
+        ESTA DISENADO PARA USO DE DESARROLLADORES
+        Y VERIFICAR FACILMENTE
+        LA FUNCIONALIDAD DEL JUEGO*/
         Snackbar.make(
                 findViewById(android.R.id.content),
                 "El numero a adivinar es " + NUMERO_ADIVINAR,
@@ -68,14 +71,20 @@ public class JuegoFacilActivity extends AppCompatActivity {
             }
         }).show();
 
+//AL PRESIONAR EL BOTON DE ADIVINAR
         btnAdivinar.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View view) {
+
+                //REALIZAMOS VALIDACION DE FORMULARIO EN ESTE CASO DE NUMERO INGRESADO
                 isAllFieldsChecked = CheckAllFields();
+                //SI ESTA CORRECTO ENTONCES INICIAMOS JUEGO
                 if (isAllFieldsChecked) {
+                    //TOMAMOS EL VALOR ESCRITO DE TIET Y LO PASAMOS A NUMERO
                     int numeroEscogido = Integer.parseInt(tiet.getText().toString());
                     tvMensaje.setError(null);
+                    //SI EL NUMERO ES CORRECTO ENTONCES MOSTRAMOS NOTIFICACION DE EXITO Y CAMBIAMOS IMAGEN
                     if (numeroEscogido == NUMERO_ADIVINAR) {
                         ivMensaje.setImageDrawable(getResources().getDrawable(R.drawable.check));
                         tvMensaje.setText("Yes!, secret number is " + NUMERO_ADIVINAR);
@@ -86,8 +95,9 @@ public class JuegoFacilActivity extends AppCompatActivity {
                         btnReset.setVisibility(View.VISIBLE);
                         tvVidasExtra.setVisibility(View.VISIBLE);
                         tvVidasExtra.append(String.valueOf(vidas) + " lives still!\n\nCongratulations player");
-
-                    } else if (vidas > 1 && numeroEscogido != NUMERO_ADIVINAR) {
+                    }
+                    //SI SE EQUIVOCA Y AUN CONSERVA VIDAS SIMPLEMENTE RESTAMOS UNA VIDA Y MOSTRAMOS MENSAJE DE "UPS"
+                    else if (vidas > 1 && numeroEscogido != NUMERO_ADIVINAR) {
                         vidas--;
                         tiet.setText("");
                         tiet.setHint("Try another one");
@@ -100,7 +110,9 @@ public class JuegoFacilActivity extends AppCompatActivity {
                             textoVidas += "♥";
                         }
                         tvVidas.setText(textoVidas);
-                    } else {
+                    }
+                    //SI EL NUMERO ES INCORRECTO Y NO TENEMOS MAS VIDAS ENTONCES MOSTRAMOS NOTIFICACION DE FAIL Y CAMBIAMOS IMAGEN
+                    else {
                         String textoVidas = "Lives: ";
                         tvVidas.setText(textoVidas);
                         ivMensaje.setImageDrawable(getResources().getDrawable(R.drawable.cancel));
@@ -118,19 +130,19 @@ public class JuegoFacilActivity extends AppCompatActivity {
                 }
             }
         });
-
+/*//UNA VEZ TERMINADO EL JUEGO DAMOS LA POSIBILIDAD DE COMENZAR DE NUEVO DESDE LA MISMA PANTALLA
+        ESTO LO LOGRAMOS RESTEANDO LA ACTIVIDAD Y QUITANDO ANIMACIONES PARA DAR UNA APARIENCIA
+                DE RESETEO DE VALORES EN CAMPOS Y NO DE LA PANTALLA COMO TAL*/
         btnReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
                 startActivity(getIntent());
                 overridePendingTransition(0, 0);
-
             }
         });
-
     }
-
+    //REGRESO A PANTALLA ANTERIOR POR MEDIO DEL ACTION BAR
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
@@ -139,20 +151,19 @@ public class JuegoFacilActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+//METODO DE COMPROBACION  CON MENSAJES DE ERROR
     private boolean CheckAllFields() {
         if (Objects.requireNonNull(tiet.getText()).toString().equals("")) {
             tvMensaje.setError("");
             tvMensaje.setText("Please, enter right numbers ...");
             return false;
-        }
-        else  if (Integer.parseInt(tiet.getText().toString()) > 10 || Integer.parseInt(tiet.getText().toString()) < 0) {
+        } else if (Integer.parseInt(tiet.getText().toString()) > 10 || Integer.parseInt(tiet.getText().toString()) < 0) {
             tvMensaje.setError("");
             tvMensaje.setText("Please, enter right numbers ...");
             return false;
-        }
-        else
-        // after all validation return true.
-        return true;
+        } else
+            // after all validation return true.
+            return true;
     }
 }
 

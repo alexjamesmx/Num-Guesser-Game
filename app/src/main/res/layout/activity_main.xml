@@ -44,18 +44,6 @@
             android:paddingVertical="16dp"/>
 
 
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_contadortiempo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Ejemplo de timer"
-            app:cornerRadius="26dp"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            app:icon="@drawable/ic_timer"
-            android:layout_marginVertical="8dp"
-            android:paddingVertical="16dp"/>
-
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_instrucciones"
             android:layout_width="match_parent"

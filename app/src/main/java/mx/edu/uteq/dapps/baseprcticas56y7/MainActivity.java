@@ -19,7 +19,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         btnInstrucciones = findViewById(R.id.btn_instrucciones);
-        btnContadortiempo = findViewById(R.id.btn_contadortiempo);
         btnJuegofacil = findViewById(R.id.btn_juegofacil);
         btnJuegodificil = findViewById(R.id.btn_juegodificil);
 
@@ -35,17 +34,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        btnContadortiempo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(
-                        new Intent(
-                                MainActivity.this,
-                                ContadorTiempoActivity.class
-                        )
-                );
-            }
-        });
 
         btnJuegofacil.setOnClickListener(new View.OnClickListener() {
             @Override

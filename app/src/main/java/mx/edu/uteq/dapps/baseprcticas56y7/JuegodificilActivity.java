@@ -1,5 +1,5 @@
 package mx.edu.uteq.dapps.baseprcticas56y7;
-
+//DEPOENDENCIAS Y/O LIBRERIAS
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -24,14 +24,14 @@ import java.util.TimerTask;
 import mx.edu.uteq.dapps.baseprcticas56y7.R;
 
 public class JuegodificilActivity extends AppCompatActivity {
-    private ActionBar actionBar;
-
-    private Timer temporizador;
+    //VARIABLES PRIMITIVAS
     private final int NUM_MIN = 1;
     private final int NUM_MAX = 30;
     private int NUMERO_ADIVINAR = (int) Math.floor(Math.random() * (NUM_MAX - NUM_MIN + 1) + NUM_MIN);
     private int vidas, contadorTiempo;
 
+    //VARIABLES DE COMPONENTES
+    private Timer temporizador;
     private TextView tvVidas, tvVidasExtra, tvTiempo;
     private ImageView ivMensaje;
     private TextView tvMensaje;
@@ -47,11 +47,8 @@ public class JuegodificilActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_juego_dificil);
-        actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
 
+        //VALOR ASIGNADOS DE COMPONENTES A VARIABLES
         tvVidas = findViewById(R.id.tvVidas);
         tvVidasExtra = findViewById(R.id.tvVidasExtra);
         ivMensaje = findViewById(R.id.ivMensaje);
@@ -67,7 +64,10 @@ public class JuegodificilActivity extends AppCompatActivity {
 
         vidas = 4;
 
-
+/*      MENSAJE DANDO LA RESOUESTA CORRECTA
+        ESTA DISENADO PARA USO DE DESARROLLADORES
+        Y VERIFICAR FACILMENTE
+        LA FUNCIONALIDAD DEL JUEGO*/
         Snackbar.make(
                 findViewById(android.R.id.content),
                 "El numero a adivinar es " + NUMERO_ADIVINAR,
@@ -79,21 +79,25 @@ public class JuegodificilActivity extends AppCompatActivity {
             }
         }).show();
 
-
+//AL PRESIONAR EL BOTON DE ADIVINAR
         btnAdivinar.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View view) {
+
+                //REALIZAMOS VALIDACION DE FORMULARIO EN ESTE CASO DE NUMERO INGRESADO
                 isAllFieldsChecked = CheckAllFields();
                 if (isAllFieldsChecked) {
                     btnAdivinar.setText("GUESS");
                     if(contadorTiempo < 1){
                         iniciaConteo();
                     }
-
+                    //SI ESTA CORRECTO ENTONCES INICIAMOS JUEGO
 
                     int numeroEscogido = Integer.parseInt(tiet.getText().toString());
                     tvMensaje.setError(null);
+
+                    //SI EL NUMERO ES CORRECTO ENTONCES MOSTRAMOS NOTIFICACION DE EXITO Y CAMBIAMOS IMAGEN
                     if (numeroEscogido == NUMERO_ADIVINAR) {
                         stopConteo();
                         ivMensaje.setImageDrawable(getResources().getDrawable(R.drawable.check));
@@ -106,7 +110,9 @@ public class JuegodificilActivity extends AppCompatActivity {
                         tvVidasExtra.setVisibility(View.VISIBLE);
                         tvVidasExtra.append(String.valueOf(vidas) + " lives still!\n\nCongratulations player");
 
-                    } else if (vidas > 1 && numeroEscogido != NUMERO_ADIVINAR) {
+                    }
+                    //SI SE EQUIVOCA Y AUN CONSERVA VIDAS SIMPLEMENTE RESTAMOS UNA VIDA Y MOSTRAMOS MENSAJE DE "UPS"
+                    else if (vidas > 1 && numeroEscogido != NUMERO_ADIVINAR) {
                         vidas--;
                         tiet.setText("");
                         tiet.setHint("Try another one");
@@ -119,7 +125,9 @@ public class JuegodificilActivity extends AppCompatActivity {
                             textoVidas += "♥";
                         }
                         tvVidas.setText(textoVidas);
-                    } else {
+                    }
+                    //SI EL NUMERO ES INCORRECTO Y NO TENEMOS MAS VIDAS ENTONCES MOSTRAMOS NOTIFICACION DE FAIL Y CAMBIAMOS IMAGEN
+                    else {
                         stopConteo();
                         String textoVidas = "Lives: ";
                         tvVidas.setText(textoVidas);
@@ -139,6 +147,9 @@ public class JuegodificilActivity extends AppCompatActivity {
             }
         });
 
+        /*//UNA VEZ TERMINADO EL JUEGO DAMOS LA POSIBILIDAD DE COMENZAR DE NUEVO DESDE LA MISMA PANTALLA
+        ESTO LO LOGRAMOS RESTEANDO LA ACTIVIDAD Y QUITANDO ANIMACIONES PARA DAR UNA APARIENCIA
+                DE RESETEO DE VALORES EN CAMPOS Y NO DE LA PANTALLA COMO TAL*/
         btnReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -151,14 +162,7 @@ public class JuegodificilActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            finish();
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
+    //METODO DE COMPROBACION  CON MENSAJES DE ERROR
     private boolean CheckAllFields() {
         if (Objects.requireNonNull(tiet.getText()).toString().equals("")) {
             tvMensaje.setError("");
@@ -173,6 +177,7 @@ public class JuegodificilActivity extends AppCompatActivity {
             return true;
     }
 
+    //METODO PARA INICIAR TEMPORIZADOR
     private void iniciaConteo() {
         temporizador = new Timer();
         temporizador.scheduleAtFixedRate(new TimerTask() {
@@ -184,6 +189,9 @@ public class JuegodificilActivity extends AppCompatActivity {
                     public void run() {
                         contadorTiempo++;
                         tvTiempo.setText(String.valueOf(contadorTiempo));
+
+                   /*     SI EL TIEMPO EXCEDE 1 MIN SE PARA EL TEMPORIZADOR Y MANDAMOS MENSAJE
+                                DE "PERDIO EL JUEGO"*/
                         if (contadorTiempo == 60) {
                             stopConteo();
                             ivMensaje.setImageDrawable(getResources().getDrawable(R.drawable.cancel));
@@ -204,7 +212,7 @@ public class JuegodificilActivity extends AppCompatActivity {
         }, 1000, 1000);
     }
 
-
+//METODO DE PARAR EL TEMPORIZADOR Y LO DEJAMOS EN 60 SEGUNDOS
     public void stopConteo() {
         temporizador.cancel();
         contadorTiempo = 60;

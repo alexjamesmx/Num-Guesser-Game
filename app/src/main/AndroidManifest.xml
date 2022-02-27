@@ -19,10 +19,6 @@
             android:exported="false"
             android:label="Adivina (Fácil)" />
         <activity
-            android:name=".ContadorTiempoActivity"
-            android:exported="false"
-            android:label="Cronómetro" />
-        <activity
             android:name=".InstruccionesActivity"
             android:exported="false"
             android:label="Instrucciones del juego" />

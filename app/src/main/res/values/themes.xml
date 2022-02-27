@@ -26,14 +26,4 @@
         <item name="android:textColor">@color/danger_light</item>
         <item name='android:textSize'>24sp</item>
     </style>
-
-    <style name="Widget.MaterialComponents.Button.OutlinedButton.GuessButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
-        <item name="android:strokeColor">@color/purple_200</item>
-        <item name="android:backgroundTint">@color/purple_200</item>
-        <item name="android:textColor">@color/black</item>
-        <item name="android:text">Guess</item>
-        <item name='icon'>@drawable/ic_lightbulb</item>
-    </style>
-
-
 </resources>
