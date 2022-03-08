@@ -68,6 +68,8 @@ public class JuegoEpicoActivity extends AppCompatActivity {
         ESTA DISENADO PARA USO DE DESARROLLADORES
         Y VERIFICAR FACILMENTE
         LA FUNCIONALIDAD DEL JUEGO*/
+
+        //ESTE METODO MUESTRA EL TOAST PARA FACILIDAD EN DESARROLLO
      numeroAdivinar();
 
 //AL PRESIONAR EL BOTON DE ADIVINAR
@@ -80,6 +82,8 @@ public class JuegoEpicoActivity extends AppCompatActivity {
 
                 if (isAllFieldsChecked) {
                     btnAdivinar.setText("GUESS");
+
+                    //ESTE IF FUNCIONA UNA SOLA VEZ AL INICIO DEL JUEGO
                     if(contadorTiempo > 0 && numeroJuegos==0 && primerjuego ==0){
                         primerjuego = 1;
                         iniciaConteo();
@@ -90,9 +94,11 @@ public class JuegoEpicoActivity extends AppCompatActivity {
 
                     //SI EL NUMERO ES CORRECTO ENTONCES MOSTRAMOS NOTIFICACION DE EXITO Y CAMBIAMOS IMAGEN
                     if (numeroEscogido == NUMERO_ADIVINAR) {
+                        //SI ADIVINA SE SUMA LA CANTIDAD DE JUEGOS GANADOS+1 Y SE PONE EL TEXTO EN VERDE
                         tvJuegos.setTextColor(0xFF28A745);
                         numeroJuegos++;
                         contadorTiempo = 30;
+                        //LAS VIDAS SE RESETEAN
                         vidas = 5;
                         String textoJuegos = "Games won: ";
                         textoJuegos += String.valueOf(numeroJuegos);
@@ -101,8 +107,11 @@ public class JuegoEpicoActivity extends AppCompatActivity {
                         tvMensaje.setText("Yes!, continue playing! \n");
                         tiet.setText("");
                         tvVidas.setText("Lives: ♥♥♥♥♥");
+                        //RESETEAMOS EL NUMERO RANDOM
                         NUMERO_ADIVINAR = (int) Math.floor(Math.random() * (NUM_MAX - NUM_MIN + 1) + NUM_MIN);
+                        //MOSTRAMOS EL TOAST DEL NUEVO NUMERO GENERADO
                         numeroAdivinar();
+                        //REINICIAMOS CONTEO
                         reiniciarConteo();
                     }
                     //SI SE EQUIVOCA Y AUN CONSERVA VIDAS SIMPLEMENTE RESTAMOS UNA VIDA Y MOSTRAMOS MENSAJE DE "UPS"
@@ -132,8 +141,6 @@ public class JuegoEpicoActivity extends AppCompatActivity {
                         btnReset.setVisibility(View.VISIBLE);
                         tvVidasExtra.setTextAppearance(R.style.boldText);
                         tvVidasExtra.setVisibility(View.VISIBLE);
-                        tvVidasExtra.append("\n0 lives remaining!");
-
                     }
                 }
             }

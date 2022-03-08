@@ -210,7 +210,7 @@
                         android:gravity="top|center"
                         android:letterSpacing="0.2"
                         android:padding="8dp"
-                        android:text="Won with: "
+                        android:text="You lost "
                         android:textAlignment="center"
                         android:textColor="@color/success"
                         android:visibility="gone" />
