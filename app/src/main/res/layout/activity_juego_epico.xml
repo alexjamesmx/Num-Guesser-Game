@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?><!--    USO DE NESTEDSCROLL YA DEPENDIENDO EL DISPOSITIVO ALGUNOS COMPONENTES PODRIAN NO VERSE
+        MUY BIEN UTILIZANDO WEIGHTS, ENTONCES CON SRCOLL MANTIENEN BIEN SU TAMANO Y
+        SE LOGRA UNA MEJOR VISUALIZACION-->
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <!--    UN SOLO HIJO-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F1F2EB"
+        android:orientation="horizontal"
+        android:weightSum="12"
+        tools:context=".JuegodificilActivity">
+
+        <!--    MITAD DE LA PANTALLA HORIZONTAL-->
+        <androidx.cardview.widget.CardView
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginVertical="16dp"
+            android:layout_weight="6"
+            android:elevation="10dp"
+            app:cardCornerRadius="16dp">
+            <!--TAMANOS DE WRAP CONTENT PPARA VERTICAL Y MATCH PARENT EN HORIZONTAL PARA NO PERDER VISIBILIDAD DE
+                    NINGUN COMPONENTE-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvVidas"
+                    style="@style/TextAppearance.MaterialComponents.Headline6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:letterSpacing="0.2"
+                    android:text="Lives:\n \n ♥♥♥♥♥"
+                    android:textAlignment="center"
+                    android:textColor="@color/danger" />
+                <TextView
+                    android:id="@+id/tvJuegos"
+                    style="@style/TextAppearance.MaterialComponents.Headline6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:letterSpacing="0.2"
+                    android:text="Games won: 0"
+                    android:textAlignment="center"
+                    android:textColor="@color/danger" />
+
+                <ImageView
+                    android:id="@+id/ivMensaje"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:padding="32dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/question__aa1" />
+
+                <TextView
+                    android:id="@+id/tvMensaje"
+                    style="@style/TextAppearance.MaterialComponents.Headline6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="16dp"
+                    android:gravity="center"
+                    android:letterSpacing="0.2"
+                    android:paddingHorizontal="8dp"
+                    android:text=""
+                    android:textAlignment="center"
+                    android:textColor="?attr/colorPrimary" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!--MITAD DE LA PANTALLA HORIZONTAL-->
+        <LinearLayout
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginVertical="16dp"
+            android:layout_weight="6"
+            android:orientation="vertical"
+            android:weightSum="12">
+            <!--            RELOJ-->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginBottom="8dp"
+                android:elevation="10dp"
+                app:cardCornerRadius="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="12">
+
+                    <ImageView
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="8dp"
+                        android:layout_weight="6"
+                        android:gravity="end"
+                        android:src="@drawable/stopwatch" />
+
+                    <TextView
+                        android:id="@+id/tv_tiempo"
+                        style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="8dp"
+                        android:layout_weight="6"
+                        android:gravity="center"
+                        android:letterSpacing="0.2"
+                        android:text="30"
+                        android:textAlignment="center"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:elevation="10dp"
+                app:cardCornerRadius="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="top|center"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tietBox"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="16dp"
+                        android:hint="..."
+                        app:boxStrokeColor="@color/black"
+                        app:boxStrokeWidth="2dp"
+                        app:counterEnabled="true"
+                        app:counterMaxLength="2"
+                        app:endIconDrawable="@drawable/ic_question_mark"
+                        app:endIconMode="custom"
+                        app:helperText="Enter a number between 1-50"
+                        app:helperTextTextColor="@color/purple_200">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/tiet"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:maxLength="2" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnAdivinar"
+                        style='@style/Widget.MaterialComponents.Button.OutlinedButton'
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:backgroundTint="#DBBEFF"
+                        android:text="start"
+                        android:textColor="@color/black"
+                        app:cornerRadius="24dp"
+                        app:icon="@drawable/ic_lightbulb"
+                        app:iconGravity="top"
+                        app:rippleColor="@color/purple_200"
+                        app:strokeColor="@color/purple_200"
+                        app:strokeWidth="2dp" />
+                    <!--COMPONENTES INVISIBLES QUE NO OCUPAN ESPACIO
+                     HASTA SER EJECUCUTADAS Y LLAMADAS EN EL PROGRAMA -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnReset"
+                        style='@style/Widget.MaterialComponents.Button.OutlinedButton'
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:backgroundTint="@color/danger_light"
+                        android:text="Reset"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:visibility="gone"
+                        app:cornerRadius="24dp"
+                        app:rippleColor="@color/danger"
+                        app:strokeColor="@color/danger_light"
+                        app:strokeWidth="2dp" />
+                    <!--COMPONENTES INVISIBLES QUE NO OCUPAN ESPACIO
+                                        HASTA SER EJECUCUTADAS Y LLAMADAS EN EL PROGRAMA -->
+                    <TextView
+                        android:id="@+id/tvVidasExtra"
+                        style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                        android:layout_width="match_parent"
+                        android:layout_height="51dp"
+                        android:layout_gravity="top"
+                        android:layout_marginVertical="8dp"
+                        android:gravity="top|center"
+                        android:letterSpacing="0.2"
+                        android:padding="8dp"
+                        android:text="Won with: "
+                        android:textAlignment="center"
+                        android:textColor="@color/success"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

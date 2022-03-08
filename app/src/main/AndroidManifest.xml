@@ -10,6 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BasePrácticas56Y7">
         <activity
+            android:name=".JuegoEpicoActivity"
+            android:exported="false"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.BasePrácticas56Y7.FullScreen"/>
+        <activity
             android:name=".JuegodificilActivity"
             android:exported="false"
             android:screenOrientation="landscape"

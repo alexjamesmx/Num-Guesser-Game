@@ -9,7 +9,7 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button btnJuegofacil, btnJuegodificil;
+    private Button btnJuegofacil, btnJuegodificil, btnJuegoEpico;
     private Button btnInstrucciones;
     private Button btnContadortiempo;
 
@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
         btnInstrucciones = findViewById(R.id.btn_instrucciones);
         btnJuegofacil = findViewById(R.id.btn_juegofacil);
         btnJuegodificil = findViewById(R.id.btn_juegodificil);
+        btnJuegoEpico = findViewById(R.id.btn_juegoepico);
 
         btnInstrucciones.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,6 +54,17 @@ public class MainActivity extends AppCompatActivity {
                         new Intent(
                                 MainActivity.this,
                                 JuegodificilActivity.class
+                        )
+                );
+            }
+        });
+        btnJuegoEpico.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(
+                        new Intent(
+                                MainActivity.this,
+                                JuegoEpicoActivity.class
                         )
                 );
             }
