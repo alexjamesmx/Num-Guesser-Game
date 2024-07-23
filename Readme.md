@@ -51,12 +51,15 @@ git clone
 ### UI Design
 
 - **Easy Mode**
+
   <img src="/img/easy.png" alt="Easy Mode Screenshot" width="200" height="400" />
 
 - **Medium Mode**
+
   <img src="/img/medium.png" alt="Medium Mode Screenshot" width="200" height="400" />
 
 - **Hard Mode**
+
   <img src="/img/hard.png" alt="Hard Mode Screenshot" width="200" height="400" />
 
 ### License
