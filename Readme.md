@@ -2,8 +2,10 @@
 
 <h1 align="center">Number Guesser Android Java Game</h1>
 
-<div align="center"> 
-  ![Java](https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=java&logoColor=white) 
+<div align="center">
+
+![Java](https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=java&logoColor=white)
+
 </div>
 
 <div align="center"> 
@@ -14,9 +16,8 @@
 
     Note: I'm working on deploying the game on Google Play Store. Stay tuned for updates!
 
+<img src="/img/menu.png" alt="Game Menu Screenshot" width="200" height="400" /> 
 </div>
-
-![Game Menu Screenshot](/img/menu.png)
 
 ### Requirements
 
@@ -50,15 +51,13 @@ git clone
 ### UI Design
 
 - **Easy Mode**
-
-  - ![Easy Mode Screenshot](/img/easy.png)
+  <img src="/img/easy.png" alt="Easy Mode Screenshot" width="200" height="400" />
 
 - **Medium Mode**
-
-  - ![Medium Mode Screenshot](/img/medium.png)
+  <img src="/img/medium.png" alt="Medium Mode Screenshot" width="200" height="400" />
 
 - **Hard Mode**
-  - ![Hard Mode Screenshot](/img/hard.png)
+  <img src="/img/hard.png" alt="Hard Mode Screenshot" width="200" height="400" />
 
 ### License
 
