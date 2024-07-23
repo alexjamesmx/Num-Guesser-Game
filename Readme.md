@@ -10,10 +10,7 @@
 
 <div align="center"> 
     Android Java Game where the player has to guess a number within a certain number of tries and time limits based on the difficulty level selected.
-    Here, you'll learn about timers, random number generation, score tracking and UI design in Android Studio.
-
-    Have fun playing the game!
-
+    Here, you'll learn about timers, random number generation, score tracking and UI design in Android Studio. Have fun playing the game! 
     Note: I'm working on deploying the game on Google Play Store. Stay tuned for updates!
 
 <img src="/img/menu.png" alt="Game Menu Screenshot" width="200" height="400" /> 
@@ -61,6 +58,11 @@ git clone
 - **Hard Mode**
 
   <img src="/img/hard.png" alt="Hard Mode Screenshot" width="400" height="200" />
+
+### Contributing
+
+Feel free to contribute to the project by forking the repository and submitting a pull request.
+Add a ⭐ if you like the project.
 
 ### License
 
