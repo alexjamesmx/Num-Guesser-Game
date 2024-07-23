@@ -1,16 +1,13 @@
-package mx.edu.uteq.dapps.baseprcticas56y7;
+package alex.com.juego;
 //DEPOENDENCIAS Y/O LIBRERIAS
 import android.os.Build;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -21,23 +18,24 @@ import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import mx.edu.uteq.dapps.baseprcticas56y7.R;
+import alex.com.juego.R;
 
-public class JuegoEpicoActivity extends AppCompatActivity {
+public class JuegodificilActivity extends AppCompatActivity {
     //VARIABLES PRIMITIVAS
     private final int NUM_MIN = 1;
-    private final int NUM_MAX = 50;
-    private int NUMERO_ADIVINAR = 0;
-    private int vidas, contadorTiempo, numeroJuegos,    primerjuego = 0;
+    private final int NUM_MAX = 30;
+    private int NUMERO_ADIVINAR = (int) Math.floor(Math.random() * (NUM_MAX - NUM_MIN + 1) + NUM_MIN);
+    private int vidas, contadorTiempo;
 
     //VARIABLES DE COMPONENTES
     private Timer temporizador;
-    private TextView tvVidas, tvVidasExtra, tvTiempo, tvJuegos;
+    private TextView tvVidas, tvVidasExtra, tvTiempo;
     private ImageView ivMensaje;
     private TextView tvMensaje;
     private TextInputEditText tiet;
     private Button btnAdivinar, btnReset;
     private TextInputLayout tietBox;
+
     boolean isAllFieldsChecked = false;
 
 
@@ -45,7 +43,7 @@ public class JuegoEpicoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_juego_epico);
+        setContentView(R.layout.activity_juego_dificil);
 
         //VALOR ASIGNADOS DE COMPONENTES A VARIABLES
         tvVidas = findViewById(R.id.tvVidas);
@@ -56,63 +54,59 @@ public class JuegoEpicoActivity extends AppCompatActivity {
         tiet = findViewById(R.id.tiet);
         btnReset = findViewById(R.id.btnReset);
         tietBox = findViewById(R.id.tietBox);
-        tvJuegos = findViewById(R.id.tvJuegos);
 
         temporizador = new Timer();
-        contadorTiempo = 30;
+        contadorTiempo = 0;
         tvTiempo = findViewById(R.id.tv_tiempo);
-        vidas = 5;
 
-        NUMERO_ADIVINAR = (int) Math.floor(Math.random() * (NUM_MAX - NUM_MIN + 1) + NUM_MIN);
+        vidas = 4;
+
 /*      MENSAJE DANDO LA RESOUESTA CORRECTA
         ESTA DISENADO PARA USO DE DESARROLLADORES
         Y VERIFICAR FACILMENTE
         LA FUNCIONALIDAD DEL JUEGO*/
+        Snackbar.make(
+                findViewById(android.R.id.content),
+                "El numero a adivinar es " + NUMERO_ADIVINAR,
+                Snackbar.LENGTH_INDEFINITE
+        ).setAction("Ok", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-        //ESTE METODO MUESTRA EL TOAST PARA FACILIDAD EN DESARROLLO
-     numeroAdivinar();
+            }
+        }).show();
 
 //AL PRESIONAR EL BOTON DE ADIVINAR
         btnAdivinar.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View view) {
-                isAllFieldsChecked = CheckAllFields();
-                //REALIZAMOS VALIDACION DE FORMULARIO EN ESTE CASO DE NUMERO INGRESADO
 
+                //REALIZAMOS VALIDACION DE FORMULARIO EN ESTE CASO DE NUMERO INGRESADO
+                isAllFieldsChecked = CheckAllFields();
                 if (isAllFieldsChecked) {
                     btnAdivinar.setText("GUESS");
-
-                    //ESTE IF FUNCIONA UNA SOLA VEZ AL INICIO DEL JUEGO
-                    if(contadorTiempo > 0 && numeroJuegos==0 && primerjuego ==0){
-                        primerjuego = 1;
+                    if(contadorTiempo < 1){
                         iniciaConteo();
                     }
                     //SI ESTA CORRECTO ENTONCES INICIAMOS JUEGO
+
                     int numeroEscogido = Integer.parseInt(tiet.getText().toString());
                     tvMensaje.setError(null);
 
                     //SI EL NUMERO ES CORRECTO ENTONCES MOSTRAMOS NOTIFICACION DE EXITO Y CAMBIAMOS IMAGEN
                     if (numeroEscogido == NUMERO_ADIVINAR) {
-                        //SI ADIVINA SE SUMA LA CANTIDAD DE JUEGOS GANADOS+1 Y SE PONE EL TEXTO EN VERDE
-                        tvJuegos.setTextColor(0xFF28A745);
-                        numeroJuegos++;
-                        contadorTiempo = 30;
-                        //LAS VIDAS SE RESETEAN
-                        vidas = 5;
-                        String textoJuegos = "Games won: ";
-                        textoJuegos += String.valueOf(numeroJuegos);
-                        tvJuegos.setText(textoJuegos);
+                        stopConteo();
                         ivMensaje.setImageDrawable(getResources().getDrawable(R.drawable.check));
-                        tvMensaje.setText("Yes!, continue playing! \n");
+                        tvMensaje.setText("Yes!, secret number is " + NUMERO_ADIVINAR);
                         tiet.setText("");
-                        tvVidas.setText("Lives: ♥♥♥♥♥");
-                        //RESETEAMOS EL NUMERO RANDOM
-                        NUMERO_ADIVINAR = (int) Math.floor(Math.random() * (NUM_MAX - NUM_MIN + 1) + NUM_MIN);
-                        //MOSTRAMOS EL TOAST DEL NUEVO NUMERO GENERADO
-                        numeroAdivinar();
-                        //REINICIAMOS CONTEO
-                        reiniciarConteo();
+                        btnAdivinar.setVisibility(View.GONE);
+                        tiet.setVisibility(View.GONE);
+                        tietBox.setVisibility(View.GONE);
+                        btnReset.setVisibility(View.VISIBLE);
+                        tvVidasExtra.setVisibility(View.VISIBLE);
+                        tvVidasExtra.append(String.valueOf(vidas) + " lives still!\n\nCongratulations player");
+
                     }
                     //SI SE EQUIVOCA Y AUN CONSERVA VIDAS SIMPLEMENTE RESTAMOS UNA VIDA Y MOSTRAMOS MENSAJE DE "UPS"
                     else if (vidas > 1 && numeroEscogido != NUMERO_ADIVINAR) {
@@ -124,6 +118,7 @@ public class JuegoEpicoActivity extends AppCompatActivity {
                         tvMensaje.setText("Sorry, the number is " + numeroBuscadoEs + " than " + numeroEscogido);
                         String textoVidas = "Lives: ";
                         for (int i = 0; i < vidas; i++) {
+                            System.out.println("a");
                             textoVidas += "♥";
                         }
                         tvVidas.setText(textoVidas);
@@ -134,13 +129,16 @@ public class JuegoEpicoActivity extends AppCompatActivity {
                         String textoVidas = "Lives: ";
                         tvVidas.setText(textoVidas);
                         ivMensaje.setImageDrawable(getResources().getDrawable(R.drawable.cancel));
+                        tvMensaje.setText("No!, secret number is " + NUMERO_ADIVINAR);
                         tiet.setText("");
                         btnAdivinar.setVisibility(View.GONE);
                         tiet.setVisibility(View.GONE);
                         tietBox.setVisibility(View.GONE);
                         btnReset.setVisibility(View.VISIBLE);
+                        tvVidasExtra.setText("You lost the GAME");
                         tvVidasExtra.setTextAppearance(R.style.boldText);
                         tvVidasExtra.setVisibility(View.VISIBLE);
+                        tvVidasExtra.append("\n0 lives remaining!");
                     }
                 }
             }
@@ -167,7 +165,7 @@ public class JuegoEpicoActivity extends AppCompatActivity {
             tvMensaje.setError("");
             tvMensaje.setText("Please, enter right numbers ...");
             return false;
-        } else if (Integer.parseInt(tiet.getText().toString()) > 50 || Integer.parseInt(tiet.getText().toString()) < 0) {
+        } else if (Integer.parseInt(tiet.getText().toString()) > 30 || Integer.parseInt(tiet.getText().toString()) < 0) {
             tvMensaje.setError("");
             tvMensaje.setText("Please, enter right numbers ...");
             return false;
@@ -186,12 +184,12 @@ public class JuegoEpicoActivity extends AppCompatActivity {
                     @RequiresApi(api = Build.VERSION_CODES.M)
                     @Override
                     public void run() {
-                        contadorTiempo--;
+                        contadorTiempo++;
                         tvTiempo.setText(String.valueOf(contadorTiempo));
 
                    /*     SI EL TIEMPO EXCEDE 1 MIN SE PARA EL TEMPORIZADOR Y MANDAMOS MENSAJE
                                 DE "PERDIO EL JUEGO"*/
-                        if (contadorTiempo == 0) {
+                        if (contadorTiempo == 60) {
                             stopConteo();
                             ivMensaje.setImageDrawable(getResources().getDrawable(R.drawable.cancel));
                             tvMensaje.setText("RUN OUT OF TIME");
@@ -211,29 +209,11 @@ public class JuegoEpicoActivity extends AppCompatActivity {
         }, 1000, 1000);
     }
 
-    //METODO DE PARAR EL TEMPORIZADOR Y LO DEJAMOS EN 60 SEGUNDOS
+//METODO DE PARAR EL TEMPORIZADOR Y LO DEJAMOS EN 60 SEGUNDOS
     public void stopConteo() {
         temporizador.cancel();
-        contadorTiempo = 30;
+        contadorTiempo = 60;
         tvTiempo.setText(String.valueOf(contadorTiempo));
-    }
-
-    public void reiniciarConteo() {
-        contadorTiempo = 30;
-        tvTiempo.setText(String.valueOf(contadorTiempo));
-    }
-    public void numeroAdivinar(){
-        Snackbar.make(
-                findViewById(android.R.id.content),
-                "El numero a adivinar es " + NUMERO_ADIVINAR,
-                Snackbar.LENGTH_INDEFINITE
-        ).setAction("Ok", new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        }).show();
-
     }
 
 }

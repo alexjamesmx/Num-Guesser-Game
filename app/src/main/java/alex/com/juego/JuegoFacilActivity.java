@@ -1,4 +1,4 @@
-package mx.edu.uteq.dapps.baseprcticas56y7;
+package alex.com.juego;
 //DEPOENDENCIAS Y/O LIBRERIAS
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;

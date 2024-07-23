@@ -1,4 +1,4 @@
-package mx.edu.uteq.dapps.baseprcticas56y7;
+package alex.com.juego;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;

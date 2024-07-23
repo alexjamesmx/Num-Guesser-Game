@@ -6,7 +6,7 @@ android {
     compileSdk 31
 
     defaultConfig {
-        applicationId "mx.edu.uteq.dapps.baseprcticas56y7"
+        applicationId "alex.com.juego"
         minSdk 21
         targetSdk 31
         versionCode 1
