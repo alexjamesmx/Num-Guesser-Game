@@ -56,11 +56,11 @@ git clone
 
 - **Medium Mode**
 
-  <img src="/img/medium.png" alt="Medium Mode Screenshot" width="200" height="400" />
+  <img src="/img/medium.png" alt="Medium Mode Screenshot" width="400" height="200" />
 
 - **Hard Mode**
 
-  <img src="/img/hard.png" alt="Hard Mode Screenshot" width="200" height="400" />
+  <img src="/img/hard.png" alt="Hard Mode Screenshot" width="400" height="200" />
 
 ### License
 
